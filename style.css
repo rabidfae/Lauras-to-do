@@ -1,0 +1,19 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+:root {
+    --background: #b884a4;
+    --secondaryBackground: #5c6969;
+    --text: black;
+    --teal: #67d0cc;
+    --text2: white;
+}
+body {
+    background:#b884a4;
+    color: black;
+    font-family: "Raleway", sans-serif;
+    font-weight: 100;
+    font-style: normal;
+}
