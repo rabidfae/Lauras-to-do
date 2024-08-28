@@ -5,7 +5,7 @@
 }
 :root {
     --background: #b884a4;
-    --secondaryBackground: #5c6969;
+    --secondaryBackground: #6d4e61;
     --text: black;
     --teal: #67d0cc;
     --text2: white;
@@ -16,4 +16,60 @@ body {
     font-family: "Raleway", sans-serif;
     font-weight: 100;
     font-style: normal;
+}
+.containall{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.todocontainer {
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding:50px;
+    margin-top: 150px;
+    border: 2px solid var(--teal);
+    max-width: 600px;
+    border-radius: 15px;
+    background: #6d4e61;
+    color:white;
+}
+.inputdiv{
+    display:flex;
+    justify-content: center;
+    margin-top: 25px;
+}
+#newInput {
+    padding: 8px 12px;
+    margin: 8px;
+    border: 2px solid var(--text2);
+    border-radius: 15px;
+    background-color: var(--teal);
+}
+#newDate {
+    padding: 8px 12px;
+    margin: 8px;
+    border: 2px solid var(--text2);
+    border-radius: 15px;
+    background-color: #67d0cc;
+}
+#newDate:hover, #newInput:hover, button:hover{
+    background-color: #b884a4;
+    color:white;
+}
+button{
+    background-color: #67d0cc;
+    border:2px solid white;
+    padding: 15px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-radius: 32px;
+    margin:2px;
+    font-size: large;
+    font-weight: bold;
+
+}
+#taskList{
+    text-decoration: none;
 }
