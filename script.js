@@ -25,8 +25,17 @@ const newDate = document.getElementById('newDate');//get info on due date
 const newCat = document.getElementById('newCat');//get info on category
 const taskList = document.getElementById('taskList');//list of tasks added by input
 
-function addTask () { //function to add task
-    const taskText = newInput.value.trim();// new todo
+
+
+
+
+
+
+
+
+// While this would work it didn't give me the layout I wanted. After talking with a co-workers we think that if  use an array it will work out the way I want
+//function addTask () { //function to add task
+   // const taskText = newInput.value.trim();// new todo
    
 
    // if (taskText !==''){
@@ -76,15 +85,15 @@ function addTask () { //function to add task
 
 
 
-    function completeTask(event) { //function to complete task
-      const task = event.target;
-     task.classList.toggle('completed')
-   }
+    //function completeTask(event) { //function to complete task
+     // const task = event.target;
+     //task.classList.toggle('completed')
+  // }
     
-   function deleteTask(event) { //function to delete task
-     const task = event.target.parentElement;
-       taskList.removeChild(task)
-   }
+   //function deleteTask(event) { //function to delete task
+    // const task = event.target.parentElement;
+    //   taskList.removeChild(task)
+  // }
 }
 
 
