@@ -63,7 +63,7 @@ button:hover {
     background-color: #b884a4;
 }
 
-button {
+.addbutt {
     background-color: #67d0cc;
     border: 2px solid white;
     color: var(--text2);
@@ -86,6 +86,7 @@ ul {
     text-align: left;
 }
 li{
+    list-style: none;
     padding:30px;
     margin-bottom: 10px;
 }

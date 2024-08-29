@@ -1,5 +1,6 @@
 //At least 2 functions
 //Create todo variables that will best represent my todo
+
 //Data model should store all info about todos
 //todo name
 //status
@@ -26,36 +27,64 @@ const taskList = document.getElementById('taskList');//list of tasks added by in
 
 function addTask () { //function to add task
     const taskText = newInput.value.trim();// new todo
-    if (taskText !==''){
-        const li = document.createElement ('li'); //  create list item from task 
-        li.addEventListener('click', completeTask) //complete task should remove it
-        li.textContent = taskText;
-        taskList.appendChild(li);
-        newInput.value = ''; //add input
+   
 
-    }
-    const taskText2 = newDate.value.trim(); //new due date
-    if (taskText !==''){
-        const li = document.createElement ('li'); //  create list item from task 
-        li.addEventListener('click', completeTask) //complete task should remove it
-        li.textContent = taskText2;
-        taskList.appendChild(li);
-        newDate.value = ''; //add due date
+   // if (taskText !==''){
+       // const li = document.createElement ('li'); //  create list item from task 
+       // li.textContent = taskText taskText2 taskText3;
+       // taskList.appendChild(li);
+       // newInput.value = ''; //add input
+
+       // li.addEventListener('click', completeTask) //complete task should cross it out
+
+       // const deleteBtn = document.createElement('button');
+       //deleteBtn.textContent = 'Delete';
+       // deleteBtn.addEventListener('click', deleteTask);
+       // li.appendChild(deleteBtn)
+
+   //re }
+  //  const taskText2 = newDate.value.trim(); //new due date
+  //  if (taskText !==''){
+     //   const li = document.createElement ('li'); //  create list item from task 
+   //     li.textContent = taskText2;
+       // taskList.appendChild(li);
+      //  newDate.value = ''; //add due date
+          
+     //   li.addEventListener('click', completeTask) //complete task should cross it out
+
+      //  const deleteBtn = document.createElement('button');
+       // deleteBtn.textContent = 'Delete';
+      //  deleteBtn.addEventListener('click', deleteTask);
+      //  li.appendChild(deleteBtn)
       
-    }
-    const taskText3 = newCat.value.trim(); //new category
-    if (taskText !==''){
-        const li = document.createElement ('li'); //  create list item from task 
-        li.addEventListener('click', completeTask) //complete task should remove it
-        li.textContent = taskText3;
-        taskList.appendChild(li);
-        newCat.value = ''; //add due date
+    //}
+   // const taskText3 = newCat.value.trim(); //new category
+   // if (taskText !==''){
+     //   const li = document.createElement ('li'); //  create list item from task 
+     //   li.textContent = taskText3;
+     //   taskList.appendChild(li);
+      //  newCat.value = ''; //add due date
+
+       // li.addEventListener('click', completeTask) //complete task should cross it out
+
+      //  const deleteBtn = document.createElement('button');
+      //  deleteBtn.textContent = 'Delete';
+      //  deleteBtn.addEventListener('click', deleteTask);
+      //  li.appendChild(deleteBtn)
       
-    }
+   // }
+
+
+
+    function completeTask(event) { //function to complete task
+      const task = event.target;
+     task.classList.toggle('completed')
+   }
+    
+   function deleteTask(event) { //function to delete task
+     const task = event.target.parentElement;
+       taskList.removeChild(task)
+   }
 }
 
 
-function completeTask(event) {
-    const task = event.target;
-    task.classList.toggle('completed')
-}
