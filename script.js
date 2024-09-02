@@ -62,12 +62,12 @@ let category = [
     {
         catID: 0,
         catText: "home",
-        catActive: 0 //active or not active is 0 or 1
+        catActive: 1 //active or not active is 0 or . I'm also not 100% sure this is something I can do
     },
     {
         catID: 1,
         catText: "school",
-        catActive: 0
+        catActive: 1
     },
     {
         catID: 2,
@@ -87,7 +87,7 @@ function addTask() {
         taskList.appendChild(li); //append the list item
         newInput.value = ''; //add input
 
-        //li.addEventListener('click', completeTask) //complete task should cross it out but I can't make it work just yet
+        //li.addEventListener('click', completeTask) //complete task should cross it out - but I can't make it work just yet
 
         const deleteBtn = document.createElement('button');
         deleteBtn.textContent = 'Delete';
