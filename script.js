@@ -62,7 +62,7 @@ let category = [
     {
         catID: 0,
         catText: "home",
-        catActive: 1 //active or not active is 0 or . I'm also not 100% sure this is something I can do
+        catActive: 1 //active or not active is 0 or 1. I'm also not 100% sure this is something I can do
     },
     {
         catID: 1,
