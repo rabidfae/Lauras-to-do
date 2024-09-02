@@ -33,8 +33,8 @@ body {
     align-items: center;
     padding: 50px;
     margin-top: 150px;
-    border: 2px solid var(--teal);
-    max-width: 700px;
+    border: 2px solid var(--text2);
+    max-width: 900px;
     border-radius: 15px;
     background: #6d4e61;
     color: white;
@@ -49,13 +49,16 @@ body {
 #newInput,
 #newDate,
 #newCat {
-    padding: 8px 12px;
-    margin: 8px;
+    padding: 10px;
+    margin: 5px;
     border: 2px solid var(--text2);
     border-radius: 15px;
-    background-color: var(--teal);
+    background-color: var(--secondaryBackground);
+    color: var(--text2)
 }
-
+::placeholder {
+    color:var(--text2);
+}
 #newDate:hover,
 #newInput:hover,
 #newCat:hover,
@@ -64,16 +67,14 @@ button:hover {
 }
 
 .addbutt {
-    background-color: #67d0cc;
+    background-color: var(--secondaryBackground);
     border: 2px solid white;
     color: var(--text2);
-    padding: 15px;
-    padding-left: 20px;
-    padding-right: 20px;
-    border-radius: 50%;
-    margin: 2px;
-    font-size: large;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 32px;
     font-weight: bold;
+    margin-left: 2px;;
 
 }
 
