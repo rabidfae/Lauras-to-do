@@ -151,12 +151,14 @@ button:hover {
 }
 #incompleteCount {
     background-color: var(--secondaryBackground);
-    border-radius: 32px;
-    border: 2px dotted white;
+    border-radius: 50%;
+    border: 2px solid white;
     font-weight: bold;
-    padding-right: 10px;
-    padding-left: 10px;
+    padding-right: 15px;
+    padding-left: 15px;
     padding-top:10px;
+    margin-left: 5px;
+    padding-bottom: 10px;
 }
 .taskHeader {
     font-weight: inherit;
