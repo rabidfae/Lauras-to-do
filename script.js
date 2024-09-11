@@ -68,7 +68,7 @@ function renderToDos() {
             editInput.value = toDo.toDoText; // Set the input value to the to-do text
 
             editInput.addEventListener('click', (event) => { // An event listener is added to the editInput to call event.stopPropagation(), which prevents clicks on the input from triggering the click event on the parent <li>. this allows you to focus on and edit the input with interference -- ChatGPT when I got stuck and couldn't find an answer in the textbook or on stack overflow
-                event.stopPropagation(); //This means that the event will be handled only by the element on which it was triggered, and it will not cause any additional events to be fired on its parent elements.
+                event.stopPropagation(); // This means that the event will be handled only by the element on which it was triggered, and it will not cause any additional events to be fired on its parent elements.
             });
 
             li.appendChild(editInput); // Append the input to the list item
