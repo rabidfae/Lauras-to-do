@@ -1,4 +1,4 @@
-//I am using the textbook JavaScript in easy steps by Mike McGrath to help me with this project. I am also speaking with co-workers and they are adding their opinons and helping me as I go, while leaving myself notes. 
+//I am using the textbook JavaScript in easy steps by Mike McGrath to help me with this project. I am also speaking with co-workers and they are adding their opinons and helping me as I go, while leaving myself notes. I am also checking stack overflow and ChatGPT to have things explained simpler if I'm not quite understanding it clearly
 //I know I will probably have to change a lot of things as we progress through the semester.
 
 
@@ -28,6 +28,13 @@ let toDos = [
         toDoText: "Weekly Budget",
         //todoCategory: [catID],
         toDoComplete: false
+    
+    },
+    {
+        toDoID: 4,
+        toDoText:"Work on Project",
+       // toDoCatergory: [catID],
+       toDoComplete: false
     }
 
 ]
@@ -54,20 +61,21 @@ const newInput = document.getElementById('newInput');
 const addButton = document.getElementById('addButton');
 const clearButton = document.getElementById('clearButton');
 
+
+//showing my todo array
 function renderToDos() {
     taskList.innerHTML = ''; // Clear the list
     toDos.forEach((toDo, index) => { // Loop through the to-dos
         const li = document.createElement('li'); // Create a new list item
 
         if (toDo.isEditing) { // Check if the to-do is being edited
-
             
             const editInput = document.createElement('input'); // Create a new input
             editInput.id = 'editInput'; // Set the input id so the form will work correctly
             editInput.type = 'text'; // Set the input type to text
             editInput.value = toDo.toDoText; // Set the input value to the to-do text
 
-            editInput.addEventListener('click', (event) => { // An event listener is added to the editInput to call event.stopPropagation(), which prevents clicks on the input from triggering the click event on the parent <li>. this allows you to focus on and edit the input with interference -- ChatGPT when I got stuck and couldn't find an answer in the textbook or on stack overflow
+            editInput.addEventListener('click', (event) => { // An event listener is added to the editInput to call event.stopPropagation(), which prevents clicks on the input from triggering the click event on the parent <li>. this allows you to focus on and edit the input with interference -- ChatGPT (when I got stuck and couldn't find an answer in the textbook or on stack overflow)
                 event.stopPropagation(); // This means that the event will be handled only by the element on which it was triggered, and it will not cause any additional events to be fired on its parent elements.
             });
 
@@ -115,11 +123,14 @@ function renderToDos() {
 
         li.addEventListener('click', () => {
             toDo.toDoComplete = !toDo.toDoComplete; // Toggle the completion status
+            updateIncompleteCount(); // Update the incomplete count
             renderToDos(); // Re-render the list to reflect the change
         });
 
         taskList.appendChild(li); // Append the list item to the task list
     });
+
+    updateIncompleteCount(); // Call this function after rendering the list
 }
 
 function addTask() {
@@ -133,13 +144,21 @@ function addTask() {
         toDos.push(newToDo); // Add new to-do to the array
         renderToDos(); // Re-render the list
         newInput.value = ''; // Clear input field
+        updateIncompleteCount(); // Update the incomplete count
     }
 }
 
+
 function clearToDos() {
-    toDos = toDos.filter(toDo => !toDo.toDoComplete); // Keep only incomplete to-dos
+    toDos = toDos.filter(toDo => !toDo.toDoComplete); // Keep only incomplete to-dos. is the test function. It checks each to-do item to see if it is not complete (!toDo.toDoComplete means "not complete"). If the test function returns true, the item is kept in the array; otherwise, it is removed.
     renderToDos(); // Re-render the list
+
+    updateIncompleteCount(); // Update the incomplete count
 }
+
+
+
+
 
 // Event listener for adding a task
 addButton.addEventListener('click', addTask);
@@ -151,5 +170,13 @@ clearButton.addEventListener('click', clearToDos);
 renderToDos();
 
 
+updateIncompleteCount(); // Update the incomplete count
 
+
+//complete count function
+function updateIncompleteCount() {
+    const incompleteCount = toDos.filter(toDo => !toDo.toDoComplete).length; // Count the number of incomplete tasks
+    document.getElementById('incompleteCount').textContent = incompleteCount; 
+    incompleteCount.value = 'Number of Tasks left'// Update the corresponding HTML element
+}
 

@@ -22,11 +22,16 @@
     <div class="containAll">
       <div class="todocontainer">
         <h1>To-Do List</h1>
+        <div class="taskDiv">
+          <h1 class="taskHeader">Number of tasks left:</h1>
+          <div id="incompleteCount">0</div>
+        </div>
         <input type="text" id="newInput" placeholder="Add a new task" />
         <button id="addButton">Add Task</button>
+
         <div class="ulButt">
           <ul id="taskList"></ul>
-         
+
           <button id="clearButton">Clear Completed</button>
         </div>
       </div>
