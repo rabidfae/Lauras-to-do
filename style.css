@@ -19,6 +19,9 @@ body {
     font-weight: 100;
     font-style: normal;
 }
+h1{
+    margin-bottom: 10px;
+}
 
 .containall {
     display: flex;
@@ -61,9 +64,9 @@ body {
 }
 #newDate:hover,
 #newInput:hover,
-#newCat:hover,
-button:hover {
+#newCat:hover{
     background-color: #b884a4;
+    border: 2px solid var(--teal);
 }
 
 #addButton {
