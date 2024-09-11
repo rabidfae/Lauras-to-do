@@ -96,9 +96,15 @@ function addTask() {
         newInput.value = ''; // Clear input field
     }
 }
-
+function clearToDos() {
+    toDos = toDos.filter(toDo => !toDo.toDoComplete); // Keep only incomplete to-dos
+    renderToDos(); // Re-render the list
+}
 // Event listener for adding a task
 addButton.addEventListener('click', addTask);
+
+// Event listener for clearing the to-do list
+clearButton.addEventListener('click', clearToDos);
 
 // Initial render
 renderToDos();
