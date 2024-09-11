@@ -23,7 +23,7 @@ h1{
     margin-bottom: 10px;
 }
 
-.containall {
+.containAll {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -91,7 +91,7 @@ ul {
     flex-direction: column;
     list-style:none;
     margin:5px;
-    text-align:center;
+    text-align:left;
 }
 li{
     list-style: none;
