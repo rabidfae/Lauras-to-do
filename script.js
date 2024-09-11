@@ -61,7 +61,7 @@ function renderToDos() {
 
         if (toDo.isEditing) { // Check if the to-do is being edited
 
-            console.log(`Editing to-do: ${toDo.toDoText}`); // Debug log
+            
             const editInput = document.createElement('input'); // Create a new input
             editInput.id = 'editInput'; // Set the input id so the form will work correctly
             editInput.type = 'text'; // Set the input type to text
@@ -76,7 +76,7 @@ function renderToDos() {
             const saveBtn = document.createElement('button'); // creates a save button
             saveBtn.textContent = 'Save'; // adds the text to the save button
             saveBtn.addEventListener('click', () => { // adds an event listener to the save button
-                console.log(`Saving to-do: ${editInput.value}`); // Debug log
+             
                 toDo.toDoText = editInput.value; // Set the to-do text to the input value
                 toDo.isEditing = false; // Set the isEditing property to false (so you can't edit the to-do)
                 renderToDos();// Re-render the list
