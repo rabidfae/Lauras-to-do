@@ -1,4 +1,4 @@
-//I am using the textbook JavaScript in easy steps by Mike McGrath to help me with this project. I am also speaking with co-workers and they are adding their opinons and helping me as I go, while leaving myself notes. I am also checking stack overflow and ChatGPT to have things explained simpler if I'm not quite understanding it clearly
+//I am using the textbook JavaScript in easy steps by Mike McGrath to help me with this project. I am also speaking with co-workers and they are adding their opinons and helping me as I go, while leaving myself notes. I find it easier to talk through things as I'm writing it and having to explain why I am doing it the way that I am, co-workers help with that.I am also checking stack overflow and ChatGPT to have things explained simpler if I'm not quite understanding it clearly
 //I know I will probably have to change a lot of things as we progress through the semester.
 
 
@@ -35,6 +35,12 @@ let toDos = [
         toDoText:"Work on Project",
        // toDoCatergory: [catID],
        toDoComplete: false
+    },
+    {
+        toDoID: 5,
+        toDoText: "Grocery Shopping",
+        //todoCategory: [catID],
+        toDoComplete: true
     }
 
 ]
@@ -62,7 +68,7 @@ const addButton = document.getElementById('addButton');
 const clearButton = document.getElementById('clearButton');
 
 
-//showing my todo array
+//showing my todo array onpage, making it editable, and adding a delete button. Line through completed tasks
 function renderToDos() {
     taskList.innerHTML = ''; // Clear the list
     toDos.forEach((toDo, index) => { // Loop through the to-dos
@@ -130,9 +136,9 @@ function renderToDos() {
         taskList.appendChild(li); // Append the list item to the task list
     });
 
-    updateIncompleteCount(); // Call this function after rendering the list
+    updateIncompleteCount(); // Call this function after rendering the list to update number count
 }
-
+// adding new task from input
 function addTask() {
     const taskText = newInput.value.trim(); // New to-do
     if (taskText !== '') {// Check if the input is not empty
@@ -176,7 +182,6 @@ updateIncompleteCount(); // Update the incomplete count
 //complete count function
 function updateIncompleteCount() {
     const incompleteCount = toDos.filter(toDo => !toDo.toDoComplete).length; // Count the number of incomplete tasks
-    document.getElementById('incompleteCount').textContent = incompleteCount; 
-    incompleteCount.value = 'Number of Tasks left'// Update the corresponding HTML element
+    document.getElementById('incompleteCount').textContent = incompleteCount; // Update the incomplete count
 }
 
