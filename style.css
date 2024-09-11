@@ -75,7 +75,12 @@ button:hover {
     border-radius: 32px;
     font-weight: bold;
     margin-left: 2px;;
+    margin-top: 10px;
 
+}
+#addButton:hover {
+    background-color: var(--teal);
+    border: 2px solid var(--teal);
 }
 
 ul {
@@ -83,13 +88,11 @@ ul {
     flex-direction: column;
     list-style:none;
     margin:5px;
-    margin-top: 20px;
-    text-align: left;
+    text-align:center;
 }
 li{
     list-style: none;
     padding:15px;
-    margin-right:10px
 }
 
 .taskList {
@@ -105,6 +108,12 @@ button {
     border-radius: 32px;
     font-weight: bold;
     margin-left:10px;
+    padding-top:3px;
+    padding-bottom: 3px;
+}
+button:hover {
+    background-color: var(--teal);
+    border: 2px solid var(--teal);
 }
 
 #clearButton {
@@ -118,7 +127,10 @@ button {
     font-weight: bold;
     margin-left: 2px;
 }
-
+#clearButton:hover {
+    background-color: var(--teal);
+    border: 2px solid var(--teal);
+}
 .ulButt {
     display: flex;
     flex-direction: column;
