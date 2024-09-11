@@ -21,16 +21,14 @@
     <!-- div that holds to do list -->
     <div class="containall">
       <div class="todocontainer">
-        <h1>Laura's To-do List</h1>
-        <div class="inputdiv">
-          <input type="text" id="newInput" placeholder="Add new task" />
-          <input type="text" id="newDate" placeholder="Add due date" />
-          <input type="text" id="newCat" placeholder="Category" />
-          <button class="addbutt" type="submit" onclick="addTask()">+</button>
-        </div>
-        <div class="ul-task">
+        <h1>To-Do List</h1>
+        <input type="text" id="newInput" placeholder="Add a new task" />
+        <button id="addButton">Add Task</button>
+        <div class="ulButt">
           <ul id="taskList"></ul>
-          <li></li>
+          <button id="clearButton">Clear Completed</button>
+
+          <script src="script.js"></script>
         </div>
       </div>
     </div>
@@ -38,8 +36,6 @@
 
   <script src="script.js"></script>
 </html>
-
-
 
 <!-- <i class="fa-regular fa-trash-can"></i> 
         <i class="fa-regular fa-circle-check"></i>

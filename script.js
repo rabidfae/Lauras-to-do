@@ -1,60 +1,33 @@
-//At least 2 functions
-
-//Create todo variables that will best represent my todo
-
-//Data model should store all info about todos
-//todo name
-//status
-//id
-//category
-//due date
-
-//Functions should allow access to the data model for the following procedures:
-
-//Edit Todos
-//Edit Status
-//Edit Category
-//Edit Due Date
-
-//Complete Todo
-
-//Delete Todo
-//Delete Category
-
-//Add New Todo
-//Add New Category
+//I am using the textbook JavaScript in easy steps by Mike McGrath to help me with this project. I am also speaking with co-workers and they are adding their opinons and helping me as I go, while leaving myself notes. 
+//I know I will probably have to change a lot of things as we progress through the semester.
 
 
-const newInput = document.getElementById('newInput'); //get info from input
-const newDate = document.getElementById('newDate');//get info on due date
-const newCat = document.getElementById('newCat');//get info on category
-const taskList = document.getElementById('taskList');//list of tasks added by input
 
-let todos = [
+let toDos = [
     {
-        todoID: 0,
-        todoText: "Homework",
+        toDoID: 0,
+        toDoText: "Homework",
         //todoCategory: [catID], //recommendation from co-worker to do it this way, I'm unsure why and haven't looked into it yet.
-        todoComplete: true
+        toDoComplete: true
     },
     {
-        todoID: 1,
-        todoText: "Feed Child",
+        toDoID: 1,
+        toDoText: "Feed Child",
         //todoCategory: [catID],
-        todoComplete: false
+        toDoComplete: false
 
     },
     {
-        todoID: 2,
-        todoText: "Laundry",
+        toDoID: 2,
+        toDoText: "Laundry",
         //todoCategory: [catID],
-        todoComplete: true
+        toDoComplete: true
     },
     {
-        todoID: 3,
-        todoText: "Weekly Budget",
+        toDoID: 3,
+        toDoText: "Weekly Budget",
         //todoCategory: [catID],
-        todoComplete: false
+        toDoComplete: false
     }
 
 ]
@@ -76,59 +49,60 @@ let category = [
     }
 ]
 
+const newInput = document.getElementById('newInput');
+const addButton = document.getElementById('addButton');
+const taskList = document.getElementById('taskList');
+//const newDate = document.getElementById('newDate');//get info on due date
+//const newCat = document.getElementById('newCat');//get info on category
 
+function renderToDos() {
+    taskList.innerHTML = '';
+    toDos.forEach((toDo, index) => {
+        const li = document.createElement('li');
+        li.textContent = toDo.toDoText;
 
+        // Create delete button
+        const deleteBtn = document.createElement('button');
+        deleteBtn.textContent = 'Delete';
+        deleteBtn.addEventListener('click', (event) => {
+            event.stopPropagation(); // Prevent the click event from bubbling up to the li
+            toDos.splice(index, 1); // Remove the to-do item from the array
+            renderToDos(); // Re-render the list
+        });
+
+        li.appendChild(deleteBtn); // Append the delete button to the list item
+        taskList.appendChild(li); // Append the list item to the task list
+
+        if (toDo.toDoComplete) {
+            li.style.textDecoration = 'line-through'; // Cross out if completed
+        }
+
+        li.addEventListener('click', () => {
+            toDo.toDoComplete = !toDo.toDoComplete; // switch the complete status
+            renderToDos(); // Re-render the list to reflect the change
+        });
+    });
+}
 
 function addTask() {
-    const taskText = newInput.value.trim();// new todo
+    const taskText = newInput.value.trim(); // New to-do
     if (taskText !== '') {
-        const li = document.createElement('li'); //  create list item from task 
-        li.textContent = taskText;
-        taskList.appendChild(li); //append the list item
-        newInput.value = ''; //add input
-
-        //li.addEventListener('click', completeTask) //complete task should cross it out - but I can't make it work just yet
-
-        const deleteBtn = document.createElement('button');
-        deleteBtn.textContent = 'Delete';
-        deleteBtn.addEventListener('click', deleteTask);
-        li.appendChild(deleteBtn)
-
+        const newToDo = {
+            toDoText: taskText,
+            toDoComplete: false
+        };
+        toDos.push(newToDo); // Add new to-do to the array
+        renderToDos(); // Re-render the list
+        newInput.value = ''; // Clear input field
     }
-    // why isn't this working?
-    const taskText2 = newDate.value.trim();// new date
-    if (taskText2 !== '') {
-        const li = document.createElement('li'); //  create list item from task 
-        li.textContent = taskText2; // list item will be the text from the date input
-        taskList.appendChild(li);
-        newDate.value = ''; //add input
-
-        //   li.addEventListener('click', completeTask) //complete task should cross it out
-        const deleteBtn = document.createElement('button');
-        deleteBtn.textContent = 'Delete';
-        deleteBtn.addEventListener('click', deleteTask);
-        li.appendChild(deleteBtn)
-
-    }
-    const taskText3 = newCat.value.trim(); //new category
-    if (taskText !== '') {
-        const li = document.createElement('li'); //  create list item from task 
-        li.textContent = taskText3;
-        taskList.appendChild(li);
-        newCat.value = ''; //add due date
-
-        // li.addEventListener('click', completeTask) //complete task should cross it out
-
-        const deleteBtn = document.createElement('button');
-        deleteBtn.textContent = 'Delete';
-        deleteBtn.addEventListener('click', deleteTask);
-        li.appendChild(deleteBtn)
-
-    }
-
 }
 
-function deleteTask(event) { //function to delete task
-    const task = event.target.parentElement;
-    taskList.removeChild(task)
-}
+// Event listener for adding a task
+addButton.addEventListener('click', addTask);
+
+// Initial render
+renderToDos();
+
+
+
+
