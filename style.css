@@ -141,3 +141,11 @@ button:hover {
     align-items: center;
     margin-top: 20px;
 }
+#editInput{
+    padding: 10px;
+    margin: 5px;
+    border: 2px solid var(--text2);
+    border-radius: 15px;
+    background-color: var(--secondaryBackground);
+    color: var(--text2)
+}
