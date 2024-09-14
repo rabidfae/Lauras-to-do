@@ -1,4 +1,4 @@
-//I am using the textbook JavaScript in easy steps by Mike McGrath to help me with this project. I am also speaking with co-workers and they are adding their opinons and helping me as I go, while leaving myself notes. I find it easier to talk through things as I'm writing it and having to explain why I am doing it the way that I am, co-workers help with that. I am also checking stack overflow and ChatGPT to have things explained simpler if I'm not quite understanding it clearly
+//I am using the textbook JavaScript in easy steps by Mike McGrath, Basics of Javascript by Programming Hub and Advanced Javascript by Hayden Van Der Post to help me with this project, and I'm probably confusing myself more in the process. I am also speaking with co-workers and they are adding their opinons and helping me as I go. I find it easier to talk through things as I'm writing it and having to explain why I am doing it the way that I am, co-workers help with that. I am also checking stack overflow and ChatGPT to have things explained simpler if I'm not quite understanding it clearly
 //I know I will probably have to change a lot of things as we progress through the semester.
 
 
@@ -84,13 +84,13 @@ function createToDoListItem(toDo, index) {
     if (toDo.isEditing) {
         addEditInput(li, toDo, index);
     } else {
-        li.textContent = `${toDo.toDoText}`; //just testing this out after playing in svelte. I'm not really super comfy with this yet.
+        li.textContent = `${toDo.toDoText}`; //just testing this out after playing with svelte. I'm not really super comfy with this yet.
         addEditButton(li, toDo); 
     }
-    addDeleteButton(li, index); 
-    completedOnOff(li, toDo); 
+    addDeleteButton(li, index); //add a delete button to list item
+    completedOnOff(li, toDo); //click to complete task - line through
     addCompleted(li, toDo); 
-    return li;
+    return li; //return modifed list item
 }
 
 function addEditInput(li, toDo, index) {
@@ -100,7 +100,7 @@ function addEditInput(li, toDo, index) {
     editInput.value = toDo.toDoText; 
 
     editInput.addEventListener('click', event => {
-        event.stopPropagation(); //// An event listener is added to the editInput to call event.stopPropagation(), which prevents clicks on the input from triggering the click event on the parent <li>. this allows you to focus on and edit the input with interference -- ChatGPT (when I got stuck and couldn't find an answer in the book I have or on stack overflow)
+        event.stopPropagation(); //// An event listener is added to the editInput to call event.stopPropagation(), which prevents clicks on the input from triggering the click event on the parent <li>. this allows you to focus on and edit the input with interference -- ChatGPT (when I got stuck and couldn't find an answer in the book I have or on stack overflow). I was having problems with the input box not staying active when I clicked on it.
        
     });
 
@@ -123,7 +123,7 @@ function addEditButton(li, toDo) {
     const editBtn = document.createElement('button'); 
     editBtn.textContent = 'Edit';
     editBtn.addEventListener('click', event => {
-        event.stopPropagation(); //Here it is making sure only the edit buttons are clicked and not the list item
+        event.stopPropagation(); // making sure only the edit buttons are clicked and not the list item
         toDo.isEditing = true; 
         renderToDos(); 
     });
@@ -135,7 +135,7 @@ function addDeleteButton(li, index) {
     deleteBtn.textContent = 'Delete'; 
     deleteBtn.classList.add('deleteBtn');
     deleteBtn.addEventListener('click', event => {
-        event.stopPropagation(); 
+        event.stopPropagation(); // making sure only the delete button is clicked.
         toDos.splice(index, 1); 
         renderToDos(); 
     });
