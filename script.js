@@ -69,7 +69,7 @@ const clearButton = document.getElementById('clearButton');
 
 
 
-//showing my todo array onpage, making it editable, and adding a delete button. Line through completed tasks
+//showing my todo array on page
 function renderToDos() {
     taskList.innerHTML = ''; 
     toDos.forEach((toDo, index) => { 
@@ -79,7 +79,7 @@ function renderToDos() {
     updateIncompleteCount(); 
 }
 
-function createToDoListItem(toDo, index) {
+function createToDoListItem(toDo, index) { //editing to do list item
     const li = document.createElement('li'); 
     if (toDo.isEditing) {
         addEditInput(li, toDo, index);
@@ -92,7 +92,7 @@ function createToDoListItem(toDo, index) {
     addCompleted(li, toDo); 
     return li; //return modifed list item
 }
-
+ //edit input to change the to do
 function addEditInput(li, toDo, index) {
     const editInput = document.createElement('input'); 
     editInput.id = 'editInput'; //was getting a warning saying input needed an ID
@@ -107,7 +107,7 @@ function addEditInput(li, toDo, index) {
     li.appendChild(editInput); 
     addSaveButton(li, toDo, editInput); 
 }
-
+// save button to save the changes made in the edit input
 function addSaveButton(li, toDo, editInput) {
     const saveBtn = document.createElement('button'); 
     saveBtn.textContent = 'Save'; 
@@ -118,7 +118,7 @@ function addSaveButton(li, toDo, editInput) {
     });
     li.appendChild(saveBtn); 
 }
-
+//edit button
 function addEditButton(li, toDo) {
     const editBtn = document.createElement('button'); 
     editBtn.textContent = 'Edit';
