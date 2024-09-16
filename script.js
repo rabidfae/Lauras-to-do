@@ -3,7 +3,7 @@
 
 
 
-const toDos = [
+let toDos = [
     {
         toDoID: 0,
         toDoText: "Homework",
@@ -174,7 +174,13 @@ function addTask() {
 }
 
 function clearToDos() {
-    toDos = toDos.filter(toDo => !toDo.toDoComplete); // Keep only incomplete to-dos. Filter checks each to-do item to see if it is not complete (!toDo.toDoComplete means "not complete"). If the test function returns true, the item is kept in the array; otherwise, it is removed. (co-worker suggestion)
+    //toDos = toDos.filter(toDo => !toDo.toDoComplete); // Keep only incomplete to-dos. Filter checks each to-do item to see if it is not complete (!toDo.toDoComplete means "not complete"). If the test function returns true, the item is kept in the array; otherwise, it is removed. (co-worker suggestion)
+    console.log('clearToDos function called');
+    console.log('Initial toDos:', toDos);
+
+    toDos = toDos.filter(toDo => !toDo.toDoComplete); // Keep only incomplete to-dos
+
+    console.log('Filtered toDos:', toDos);
 
     renderToDos(); 
 
