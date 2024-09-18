@@ -26,13 +26,14 @@
           <h1 class="taskHeader">Number of tasks left:</h1>
           <div id="incompleteCount">0</div>
         </div>
-        <div class="catDiv">
-          <label for="category">Choose a category</label>
-          <select id="cat" name="cat"></select>
+        <div id="form">
+          <input type="text" id="newInput" placeholder="Add a new task" />
+          <button id="addButton">Add Task</button>
+          <div class="catDiv">
+            <label for="category">Choose a category</label>
+            <select id="cat" name="cat"></select>
+          </div>
         </div>
-        <input type="text" id="newInput" placeholder="Add a new task" />
-        <button id="addButton">Add Task</button>
-
         <div class="ulButt">
           <ul id="taskList"></ul>
 
