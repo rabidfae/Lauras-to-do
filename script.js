@@ -26,14 +26,14 @@ let toDos = [
     {
         toDoID: 3,
         toDoText: "Weekly Budget",
-        category: 'work',
+        category: 'home',
         toDoComplete: false
 
     },
     {
         toDoID: 4,
         toDoText: "Work on Project",
-        category: 'school',
+        category: 'work',
         toDoComplete: false
     },
     {
@@ -203,4 +203,4 @@ function updateIncompleteCount() {
 // Edit input field must not be visible at all times, only when editing
 
 //if I want the category on the same line as the todo with the edit button and delete button able to edit either what do I need to do?
-//add category to createtodolistitem text content? spell category correctly.
+//add category to createtodolistitem text content? spell category correctly. -done
