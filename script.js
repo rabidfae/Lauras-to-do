@@ -7,62 +7,46 @@ let toDos = [
     {
         toDoID: 0,
         toDoText: "Homework",
-        //todoCategory: [catID], //recommendation from co-worker to do it this way, I'm unsure why and haven't looked into it yet.
+        category: 'school',
         toDoComplete: true
     },
     {
         toDoID: 1,
         toDoText: "Make Dinner",
-        //todoCategory: [catID],
+        category: "home",
         toDoComplete: false
 
     },
     {
         toDoID: 2,
         toDoText: "Laundry",
-        //todoCategory: [catID],
+        category: 'home',
         toDoComplete: true
     },
     {
         toDoID: 3,
         toDoText: "Weekly Budget",
-        //todoCategory: [catID],
+        category: 'work',
         toDoComplete: false
-    
+
     },
     {
         toDoID: 4,
-        toDoText:"Work on Project",
-       // toDoCatergory: [catID],
-       toDoComplete: false
+        toDoText: "Work on Project",
+        category: 'school',
+        toDoComplete: false
     },
     {
         toDoID: 5,
         toDoText: "Grocery Shopping",
-        //todoCategory: [catID],
+        category: 'home',
         toDoComplete: true
     }
 
 ]
-const category = [
-    {
-        catID: 0,
-        catText: "home",
-        catActive: 1 //active or not active is 0 or 1. I'm also not 100% sure this is something I can do
-    },
-    {
-        catID: 1,
-        catText: "school",
-        catActive: 1
-    },
-    {
-        catID: 2,
-        catText: "work",
-        catActive: 0
-    }
-]
 
-const taskList = document.getElementById('taskList');
+
+
 const newInput = document.getElementById('newInput');
 const addButton = document.getElementById('addButton');
 const clearButton = document.getElementById('clearButton');
@@ -71,88 +55,91 @@ const clearButton = document.getElementById('clearButton');
 
 //showing my todo array on page
 function renderToDos() {
-    taskList.innerHTML = ''; 
-    toDos.forEach((toDo, index) => { 
+    const taskList = document.getElementById('taskList');
+    taskList.innerHTML = '';
+    toDos.forEach((toDo, index) => {
         const li = createToDoListItem(toDo, index);
-        taskList.appendChild(li); 
+        taskList.appendChild(li);
     });
-    updateIncompleteCount(); 
+    updateIncompleteCount();
 }
 
 function createToDoListItem(toDo, index) { //editing to do list item
-    const li = document.createElement('li'); 
+    const li = document.createElement('li');
+    li.classList.add('toDoItem');
     if (toDo.isEditing) {
         addEditInput(li, toDo, index);
-    } else {
-        li.textContent = `${toDo.toDoText}`; //just testing this out after playing with svelte. I'm not really super comfy with this yet.
-        addEditButton(li, toDo); 
-    }
+    } else
+        li.textContent = `${toDo.toDoText} (${toDo.category})`; //just testing this out after playing with svelte. I'm not really super comfy with this yet.
+    addEditButton(li, toDo);
+
     addDeleteButton(li, index); //add a delete button to list item
     completedOnOff(li, toDo); //click to complete task - line through
-    addCompleted(li, toDo); 
+    addCompleted(li, toDo);
     return li; //return modifed list item
 }
- //edit input to change the to do
+
+//edit input to change the to do
 function addEditInput(li, toDo, index) {
-    const editInput = document.createElement('input'); 
+    const editInput = document.createElement('input');
     editInput.id = 'editInput'; //was getting a warning saying input needed an ID
-    editInput.type = 'text'; 
-    editInput.value = toDo.toDoText; 
+    editInput.type = 'text';
+    editInput.value = toDo.toDoText;
 
     editInput.addEventListener('click', event => {
         event.stopPropagation(); //// An event listener is added to the editInput to call event.stopPropagation(), which prevents clicks on the input from triggering the click event on the parent <li>. this allows you to focus on and edit the input with interference -- ChatGPT (when I got stuck and couldn't find an answer in the book I have or on stack overflow). I was having problems with the input box not staying active when I clicked on it.
-       
+
     });
 
-    li.appendChild(editInput); 
-    addSaveButton(li, toDo, editInput); 
+    li.appendChild(editInput);
+    addSaveButton(li, toDo, editInput);
 }
 // save button to save the changes made in the edit input
 function addSaveButton(li, toDo, editInput) {
-    const saveBtn = document.createElement('button'); 
-    saveBtn.textContent = 'Save'; 
+    const saveBtn = document.createElement('button');
+    saveBtn.textContent = 'Save';
     saveBtn.addEventListener('click', () => {
-        toDo.toDoText = editInput.value; 
-        toDo.isEditing = false; 
-        renderToDos(); 
+        toDo.toDoText = editInput.value;
+        toDo.isEditing = false;
+        renderToDos();
     });
-    li.appendChild(saveBtn); 
+    li.appendChild(saveBtn);
 }
 //edit button
 function addEditButton(li, toDo) {
-    const editBtn = document.createElement('button'); 
+    const editBtn = document.createElement('button');
     editBtn.textContent = 'Edit';
     editBtn.addEventListener('click', event => {
         event.stopPropagation(); // making sure only the edit buttons are clicked and not the list item
-        toDo.isEditing = true; 
-        renderToDos(); 
+        toDo.isEditing = true;
+        renderToDos();
     });
-    li.appendChild(editBtn); 
+    li.appendChild(editBtn);
 }
 /// deleted button
 function addDeleteButton(li, index) {
-    const deleteBtn = document.createElement('button'); 
-    deleteBtn.textContent = 'Delete'; 
+    const deleteBtn = document.createElement('button');
+    deleteBtn.textContent = 'Delete';
     deleteBtn.classList.add('deleteBtn');
     deleteBtn.addEventListener('click', event => {
         event.stopPropagation(); // making sure only the delete button is clicked.
-        toDos.splice(index, 1); 
-        renderToDos(); 
+        toDos.splice(index, 1);
+        renderToDos();
     });
-    li.appendChild(deleteBtn); 
+    li.appendChild(deleteBtn);
 }
 //completion on and off
 function completedOnOff(li, toDo) {
     if (toDo.toDoComplete) {
-        li.style.textDecoration = 'line-through'; 
+        li.style.textDecoration = 'line-through';
     }
 }
-
+//click event for completion line through
 function addCompleted(li, toDo) {
     li.addEventListener('click', () => {
-        toDo.toDoComplete = !toDo.toDoComplete; 
+        toDo.toDoComplete = !toDo.toDoComplete;
         updateIncompleteCount();
-        renderToDos(); 
+        renderToDos();
     });
 }
 
@@ -160,23 +147,23 @@ function addCompleted(li, toDo) {
 function addTask() {
     const taskText = newInput.value.trim(); // New to-do --trim removes the spaces from the beginning and end. (co-worker suggestion)
     if (taskText !== '') {
-        const newToDo = { 
-            toDoText: taskText, 
-            toDoComplete: false, 
+        const newToDo = {
+            toDoText: taskText,
+            toDoComplete: false,
             isEditing: false // Set the isEditing property to false (Not being edited by default)
         };
-        toDos.push(newToDo); 
-        renderToDos(); 
-        newInput.value = ''; 
-        updateIncompleteCount(); 
+        toDos.push(newToDo);
+        renderToDos();
+        newInput.value = '';
+        updateIncompleteCount();
     }
 
 }
 
 function clearToDos() {
     toDos = toDos.filter(toDo => !toDo.toDoComplete); // Keep only incomplete to-dos. Filter checks each to-do item to see if it is not complete (!toDo.toDoComplete means "not complete"). If the test function returns true, the item is kept in the array; otherwise, it is removed. (co-worker suggestion)
-    renderToDos(); 
-    updateIncompleteCount(); 
+    renderToDos();
+    updateIncompleteCount();
 }
 
 
@@ -197,3 +184,23 @@ function updateIncompleteCount() {
     const incompleteCount = toDos.filter(toDo => !toDo.toDoComplete).length; // Count the number of incomplete tasks
     document.getElementById('incompleteCount').textContent = incompleteCount; // Update the incomplete count
 }
+
+//category stuff
+// Users can to be able to view todos within a category (3 points)
+// It should be clear what todos are in what catagory
+// Categories in UI must mirror those that are in your data array
+// Users can view all todos regardless of category (3 points)
+// Users need to be able to select a category when adding a new todo. (3 points)
+// Users need to be able to manage categories (15 points)
+// Add new categories (5 of the 15)
+// Edit existing categories (5 of the 15)
+// Delete existing categories (5 of the 15)
+// Pay attention to what happens when a category is deleted with existing todos. This is part of a good UX.
+// When managing categories the following applies:
+// No prompt, or alert boxes
+// Use of the contenteditable HTML attribute is not allowed
+// Can't use a new category input value to edit
+// Edit input field must not be visible at all times, only when editing
+
+//if I want the category on the same line as the todo with the edit button and delete button able to edit either what do I need to do?
+//add category to createtodolistitem text content? spell category correctly.
