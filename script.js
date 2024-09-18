@@ -7,49 +7,66 @@ let toDos = [
     {
         toDoID: 0,
         toDoText: "Homework",
-        category: 'school',
+        toDoCategory: [2], //co-worker walked me through calling an index of the category array to add to the to do list item
         toDoComplete: true
     },
     {
         toDoID: 1,
         toDoText: "Make Dinner",
-        category: "home",
+        toDoCategory: [0],
         toDoComplete: false
 
     },
     {
         toDoID: 2,
         toDoText: "Laundry",
-        category: 'home',
+        toDoCategory: [0],
         toDoComplete: true
     },
     {
         toDoID: 3,
         toDoText: "Weekly Budget",
-        category: 'home',
+        toDoCategory: [0],
         toDoComplete: false
 
     },
     {
         toDoID: 4,
         toDoText: "Work on Project",
-        category: 'work',
+        toDoCategory: [1],
         toDoComplete: false
     },
     {
         toDoID: 5,
         toDoText: "Grocery Shopping",
-        category: 'home',
+        toDoCategory: [0],
         toDoComplete: true
     }
 
 ]
 
+let category = [
+    {
+        categoryID: 0,
+        categoryName: "Home",
+    },
+    {
+        categoryID: 1,
+        categoryName: "Work",
+
+    },
+    {
+        categoryID: 2,
+        categoryName: "School",
+    }
+
+]
 
 
 const newInput = document.getElementById('newInput');
 const addButton = document.getElementById('addButton');
 const clearButton = document.getElementById('clearButton');
+
 
 
 
@@ -67,10 +84,13 @@ function renderToDos() {
 function createToDoListItem(toDo, index) { //editing to do list item
     const li = document.createElement('li');
     li.classList.add('toDoItem');
+
+    const categoryNames = toDo.toDoCategory
+    .map(categoryID => category.find(category => category.categoryID === categoryID).categoryName); //This feels messy. There has to be another way to do this.
     if (toDo.isEditing) {
         addEditInput(li, toDo, index);
     } else
-        li.textContent = `${toDo.toDoText} (${toDo.category})`; //just testing this out after playing with svelte. I'm not really super comfy with this yet.
+        li.textContent = `${toDo.toDoText} (${categoryNames})`; //just testing this out after playing with svelte. I'm not really super comfy with this yet.
     addEditButton(li, toDo);
 
     addDeleteButton(li, index); //add a delete button to list item
@@ -112,14 +132,15 @@ function addEditButton(li, toDo) {
     editBtn.addEventListener('click', event => {
         event.stopPropagation(); // making sure only the edit buttons are clicked and not the list item
         toDo.isEditing = true;
+
         renderToDos();
     });
     li.appendChild(editBtn);
 }
-/// deleted button
+/// delete button
 function addDeleteButton(li, index) {
     const deleteBtn = document.createElement('button');
-    deleteBtn.textContent = 'Delete';
+    deleteBtn.textContent = 'Delete To Do';
     deleteBtn.classList.add('deleteBtn');
     deleteBtn.addEventListener('click', event => {
         event.stopPropagation(); // making sure only the delete button is clicked.
@@ -204,3 +225,11 @@ function updateIncompleteCount() {
 
 //if I want the category on the same line as the todo with the edit button and delete button able to edit either what do I need to do?
 //add category to createtodolistitem text content? spell category correctly. -done
+
+//make a drop down to add a new category 
+
+//drop down to edit category? can I add the edit feature to change the todo and the category at the same time? 
+
+//delete category instead of tasklist?
+
+
