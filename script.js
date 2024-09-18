@@ -81,17 +81,14 @@ function renderToDos() {
     updateIncompleteCount();
 }
 
-function createToDoListItem(toDo, index) { //editing to do list item
-    const li = document.createElement('li');
-    li.classList.add('toDoItem');
-
-    const categoryNames = toDo.toDoCategory
-    .map(categoryID => category.find(category => category.categoryID === categoryID).categoryName); //This feels messy. There has to be another way to do this.
-    if (toDo.isEditing) {
-        addEditInput(li, toDo, index);
-    } else
-        li.textContent = `${toDo.toDoText} (${categoryNames})`; //just testing this out after playing with svelte. I'm not really super comfy with this yet.
-    addEditButton(li, toDo);
+function createToDoListItem(toDo, index, ) { //editing to do list item
+        const li = document.createElement('li');
+        li.classList.add('toDoItem');
+        if (toDo.isEditing) {
+            addEditInput(li, toDo, index);
+        } else
+            li.textContent = `${toDo.toDoText} (${category.categoryName})`; //just testing this out after playing with svelte. I'm not really super comfy with this yet.
+        addEditButton(li, toDo);
 
     addDeleteButton(li, index); //add a delete button to list item
     completedOnOff(li, toDo); //click to complete task - line through
