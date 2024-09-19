@@ -95,7 +95,7 @@ function createToDoListItem(toDo, index,) { //editing to do list item
     if (toDo.isEditing) {
         addEditInput(li, toDo, index);
     } else
-      li.textContent = `${toDo.toDoText} (${categoryNames.join(', ')})`; 
+      li.textContent = `${toDo.toDoText} (${categoryNames})`; 
      //just testing this out after playing with svelte. I'm not really super comfy with this yet.
 
     addEditButton(li, toDo);
