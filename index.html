@@ -10,10 +10,8 @@
     <!-- <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap"
       rel="stylesheet" font awesome I may use later/> -->
 
-    <script
-      src="https://kit.fontawesome.com/725ac40a31.js"
-      crossorigin="anonymous"
-    ></script>
+    <script src="https://kit.fontawesome.com/725ac40a31.js"
+      crossorigin="anonymous"></script>
     <title>Laura's To-Do App</title>
   </head>
 
@@ -29,14 +27,16 @@
         <div id="form">
           <input type="text" id="newInput" placeholder="Add a new task" />
           <button id="addButton">Add Task</button>
-          <div class="catDiv">
-            <label for="cat">New Category:</label>
-            <select id="cat" name="cat">
-              <option value="work">Work</option>
-              <option value="school">School</option>
-              <option value="home">Home</option>
+          <div>
+            <input id="newCategoryInput" type="text" placeholder="New Category">
+            <button id="addCategoryButton">Add Category</button>
+        </div>
+        
+        <div>
+            <select id="categorySelect">
+                <!-- Categories will be populated here dynamically -->
             </select>
-          </div>
+        </div>
         </div>
         <div class="ulButt">
           <ul id="taskList"></ul>

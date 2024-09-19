@@ -81,15 +81,24 @@ function renderToDos() {
     updateIncompleteCount();
 }
 
-function createToDoListItem(toDo, index, ) { //editing to do list item
-        const li = document.createElement('li');
-        li.classList.add('toDoItem');
-        if (toDo.isEditing) {
-            addEditInput(li, toDo, index);
-        } else
-            li.textContent = `${toDo.toDoText} (${toDo.category})`; //just testing this out after playing with svelte. I'm not really super comfy with this yet.
-        addEditButton(li, toDo);
+function createToDoListItem(toDo, index,) { //editing to do list item
+    const li = document.createElement('li');
+    li.classList.add('toDoItem');
 
+//Find category name by category ID. This feels messy but I'm not sure how else to do it. I will check with a coworker to see if there is a better way to do this.
+    const categoryNames = toDo.toDoCategory.map(catID => {
+        const categoryObj = category.find(cat => cat.categoryID === catID);  
+        return categoryObj ? categoryObj.categoryName : "Unknown";
+    });
+
+
+    if (toDo.isEditing) {
+        addEditInput(li, toDo, index);
+    } else
+      li.textContent = `${toDo.toDoText} (${categoryNames.join(', ')})`; 
+     //just testing this out after playing with svelte. I'm not really super comfy with this yet.
+
+    addEditButton(li, toDo);
     addDeleteButton(li, index); //add a delete button to list item
     completedOnOff(li, toDo); //click to complete task - line through
     addCompleted(li, toDo);
@@ -204,15 +213,15 @@ function updateIncompleteCount() {
 }
 
 //category stuff
-// Users can to be able to view todos within a category (3 points)
-// It should be clear what todos are in what catagory
+// Users can to be able to view todos within a category 
+
 // Categories in UI must mirror those that are in your data array
-// Users can view all todos regardless of category (3 points)
-// Users need to be able to select a category when adding a new todo. (3 points)
-// Users need to be able to manage categories (15 points)
-// Add new categories (5 of the 15)
-// Edit existing categories (5 of the 15)
-// Delete existing categories (5 of the 15)
+// Users can view all todos regardless of category 
+// Users need to be able to select a category when adding a new todo. 
+// Users need to be able to manage categories
+// Add new categories 
+// Edit existing categories 
+// Delete existing categories 
 // Pay attention to what happens when a category is deleted with existing todos. This is part of a good UX.
 // When managing categories the following applies:
 // No prompt, or alert boxes
@@ -228,5 +237,4 @@ function updateIncompleteCount() {
 //drop down to edit category? can I add the edit feature to change the todo and the category at the same time? 
 
 //delete category instead of tasklist?
-
 

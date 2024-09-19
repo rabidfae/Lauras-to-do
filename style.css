@@ -51,6 +51,7 @@ h1{
 
 #newInput,
 #newDate,
+#newCategoryInput,
 #newCat {
     padding: 10px;
     margin: 5px;
@@ -64,6 +65,7 @@ h1{
 }
 #newDate:hover,
 #newInput:hover,
+#newCategoryInput:hover,
 #newCat:hover{
     background-color: #b884a4;
     border: 2px solid var(--teal);
@@ -96,6 +98,10 @@ ul {
 li{
     list-style: none;
     padding:15px;
+    background-color: var(--background);
+    margin-bottom: 10px;
+    border-radius: 15px;
+    border: 2px solid white;
 }
 
 .taskList {
