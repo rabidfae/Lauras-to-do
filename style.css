@@ -98,7 +98,7 @@ ul {
 li{
     list-style: none;
     padding:15px;
-    background-color: var(--background);
+    background-color: var(--secondaryBackground);
     margin-bottom: 10px;
     border-radius: 15px;
     border: 2px solid white;

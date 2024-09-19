@@ -88,7 +88,7 @@ function createToDoListItem(toDo, index,) { //editing to do list item
 //Find category name by category ID. This feels messy but I'm not sure how else to do it. I will check with a coworker to see if there is a better way to do this.
     const categoryNames = toDo.toDoCategory.map(catID => {
         const categoryObj = category.find(cat => cat.categoryID === catID);  
-        return categoryObj ? categoryObj.categoryName : "Unknown";
+        return categoryObj.categoryName;
     });
 
 
