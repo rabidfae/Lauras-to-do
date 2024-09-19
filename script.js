@@ -85,28 +85,51 @@ function createToDoListItem(toDo, index,) { //editing to do list item
     const li = document.createElement('li');
     li.classList.add('toDoItem');
 
-//Find category name by category ID. This feels messy but I'm not sure how else to do it. I will check with a coworker to see if there is a better way to do this.
+    //Find category name by category ID. This feels messy but I'm not sure how else to do it. I will check with a coworker to see if there is a better way to do this.
     const categoryNames = toDo.toDoCategory.map(catID => {
-        const categoryObj = category.find(cat => cat.categoryID === catID);  
+        const categoryObj = category.find(cat => cat.categoryID === catID);
         return categoryObj.categoryName;
     });
 
 
     if (toDo.isEditing) {
-        addEditInput(li, toDo, index);
+        addEditInput(li, toDo);
     } else
-      li.textContent = `${toDo.toDoText} (${categoryNames})`; 
-     //just testing this out after playing with svelte. I'm not really super comfy with this yet.
+        li.textContent = `${toDo.toDoText} (${categoryNames})`;
+    //just testing this out after playing with svelte. I'm not really super comfy with this yet.
 
     addEditButton(li, toDo);
-    addDeleteButton(li, index); //add a delete button to list item
+    addDeleteButton(li); //add a delete button to list item
     completedOnOff(li, toDo); //click to complete task - line through
     addCompleted(li, toDo);
     return li; //return modifed list item
 }
+//edit option to change the category. This isn't working how I want yet. I don't know if I will be able to figure it out.
+function categorySelect(li, toDo) {
+    const categorySelect = document.createElement('select');
+    categorySelect.id = 'categorySelect';
+    category.forEach(category => {
+        const option = document.createElement('option');
+        option.value = category.categoryID;
+        option.textContent = category.categoryName;
+
+        if (toDo.toDoCategory.includes(category.categoryID)) {
+            option.selected = true;
+        }
+
+        categorySelect.appendChild(option);
+    });
+
+    categorySelect.addEventListener('change', event => {
+        event.stopPropagation();
+
+    });
+
+    li.appendChild(categorySelect);
+}
 
 //edit input to change the to do
-function addEditInput(li, toDo, index) {
+function addEditInput(li, toDo,) {
     const editInput = document.createElement('input');
     editInput.id = 'editInput'; //was getting a warning saying input needed an ID
     editInput.type = 'text';
@@ -118,10 +141,15 @@ function addEditInput(li, toDo, index) {
     });
 
     li.appendChild(editInput);
-    addSaveButton(li, toDo, editInput);
+    // Call categorySelect to create the dropdown for categories
+    const categorySelectElement = categorySelect(li, toDo); // Store the select element for later use
+    addSaveButton(li, toDo, editInput, categorySelectElement);
+
+
 }
+
 // save button to save the changes made in the edit input
-function addSaveButton(li, toDo, editInput) {
+function addSaveButton(li, toDo, editInput, categorySelect) {
     const saveBtn = document.createElement('button');
     saveBtn.textContent = 'Save';
     saveBtn.addEventListener('click', () => {
@@ -146,7 +174,7 @@ function addEditButton(li, toDo) {
 /// delete button
 function addDeleteButton(li, index) {
     const deleteBtn = document.createElement('button');
-    deleteBtn.textContent = 'Delete To Do';
+    deleteBtn.textContent = 'Delete';
     deleteBtn.classList.add('deleteBtn');
     deleteBtn.addEventListener('click', event => {
         event.stopPropagation(); // making sure only the delete button is clicked.

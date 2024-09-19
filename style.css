@@ -66,7 +66,9 @@ h1{
 #newDate:hover,
 #newInput:hover,
 #newCategoryInput:hover,
-#newCat:hover{
+#newCat:hover,
+#editInput:hover,
+select:hover{
     background-color: #b884a4;
     border: 2px solid var(--teal);
 }
@@ -173,4 +175,14 @@ button:hover {
 .taskDiv {
 display:flex;
 flex-direction: row;
+}
+select{
+
+        padding: 10px;
+        margin: 5px;
+        border: 2px solid var(--text2);
+        border-radius: 15px;
+        background-color: var(--secondaryBackground);
+        color: var(--text2)
+
 }
