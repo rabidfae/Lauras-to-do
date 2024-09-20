@@ -81,7 +81,7 @@ function renderToDos() {
     updateIncompleteCount();
 }
 
-function createToDoListItem(toDo, index,) { //editing to do list item
+function createToDoListItem(toDo) { //editing to do list item
     const li = document.createElement('li');
     li.classList.add('toDoItem');
 
@@ -116,7 +116,6 @@ function categorySelect(li, toDo) {
         if (toDo.toDoCategory.includes(category.categoryID)) {
             option.selected = true;
         }
-
         categorySelect.appendChild(option);
     });
 
@@ -154,6 +153,10 @@ function addSaveButton(li, toDo, editInput, categorySelect) {
     saveBtn.textContent = 'Save';
     saveBtn.addEventListener('click', () => {
         toDo.toDoText = editInput.value;
+        // Update the category from the select
+        const select = li.querySelector('#categorySelect');
+        toDo.toDoCategory = [parseInt(select.value)]; // Update the category ID
+
         toDo.isEditing = false;
         renderToDos();
     });
@@ -256,13 +259,4 @@ function updateIncompleteCount() {
 // Use of the contenteditable HTML attribute is not allowed
 // Can't use a new category input value to edit
 // Edit input field must not be visible at all times, only when editing
-
-//if I want the category on the same line as the todo with the edit button and delete button able to edit either what do I need to do?
-//add category to createtodolistitem text content? spell category correctly. -done
-
-//make a drop down to add a new category 
-
-//drop down to edit category? can I add the edit feature to change the todo and the category at the same time? 
-
-//delete category instead of tasklist?
 
