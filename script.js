@@ -134,10 +134,10 @@ function addEditInput(li, toDo,) {
     editInput.type = 'text';
     editInput.value = toDo.toDoText;
 
-    editInput.addEventListener('click', event => {
-        event.stopPropagation(); //// An event listener is added to the editInput to call event.stopPropagation(), which prevents clicks on the input from triggering the click event on the parent <li>. this allows you to focus on and edit the input with interference -- ChatGPT (when I got stuck and couldn't find an answer in the book I have or on stack overflow). I was having problems with the input box not staying active when I clicked on it.
+   // editInput.addEventListener('click', event => {
+     //   event.stopPropagation(); //// An event listener is added to the editInput to call event.stopPropagation(), which prevents clicks on the input from triggering the click event on the parent <li>. this allows you to focus on and edit the input with interference -- ChatGPT (when I got stuck and couldn't find an answer in the book I have or on stack overflow). I was having problems with the input box not staying active when I clicked on it.
 
-    });
+   // });
 
     li.appendChild(editInput);
     // Call categorySelect to create the dropdown for categories
