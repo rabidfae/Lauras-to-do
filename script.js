@@ -63,12 +63,54 @@ let category = [
 ]
 
 
+
 const newInput = document.getElementById('newInput');
 const addButton = document.getElementById('addButton');
 const clearButton = document.getElementById('clearButton');
+const newCategoryNameInput = document.getElementById('newCat');
+const addCategoryButton = document.getElementById('addCategoryButton');
 
+// Function to add a new category I need to come up with simpler names for my functions and variables.
+function addCategory() {
+    const newCategoryName = getTrimmedCategoryName();
+    if (isValidCategoryName(newCategoryName)) {
+        const newCategory = createNewCategory(newCategoryName);
+        category.push(newCategory);
+        updateCategorySelect(newCategory);
+        clearCategoryInput();
+    }
+}
 
+function getTrimmedCategoryName() {
+    return newCategoryNameInput.value.trim();
+}
 
+function isValidCategoryName(name) {
+    return name.length > 0;
+}
+
+function createNewCategory(name) {
+    const newCategoryID = category.length ? category[category.length - 1].categoryID + 1 : 0;
+    return { categoryID: newCategoryID, categoryName: name };
+}
+
+function clearCategoryInput() {
+    newCategoryNameInput.value = '';
+}
+
+// Function to update the select elements with the new category
+function updateCategorySelect(newCategory) {
+    const selectElements = document.querySelectorAll('select#categorySelect');
+    selectElements.forEach(select => {
+        const option = document.createElement('option');
+        option.value = newCategory.categoryID;
+        option.textContent = newCategory.categoryName;
+        select.appendChild(option);
+    });
+}
+
+// Add event listener to the button
+addCategoryButton.addEventListener('click', addCategory);
 
 //showing my todo array on page
 function renderToDos() {
@@ -104,64 +146,69 @@ function createToDoListItem(toDo) { //editing to do list item
     addCompleted(li, toDo);
     return li; //return modifed list item
 }
-//edit option to change the category. This isn't working how I want yet. I don't know if I will be able to figure it out.
+//edit option to change the category. 
 function categorySelect(li, toDo) {
-    const categorySelect = document.createElement('select');
-    categorySelect.id = 'categorySelect';
+
+    console.log('entering Cat select function')
+    const select = document.createElement('select');
+    select.id = 'categorySelect';
+    
+    //add the categories to the select
     category.forEach(category => {
         const option = document.createElement('option');
         option.value = category.categoryID;
         option.textContent = category.categoryName;
 
         if (toDo.toDoCategory.includes(category.categoryID)) {
-            option.selected = true;
+            option.selected = true; // Pre-select based on toDoCategory
         }
-        categorySelect.appendChild(option);
+
+        select.appendChild(option);
     });
 
-    categorySelect.addEventListener('change', event => {
-        event.stopPropagation();
+//     select.addEventListener('change', event => {
+//         console.log('change Event')
+//       event.stopPropagation(); // Prevent triggering li click events
+       
+//    });
 
-    });
-
-    li.appendChild(categorySelect);
+    li.appendChild(select);
 }
 
-//edit input to change the to do
-function addEditInput(li, toDo,) {
+function addEditInput(li, toDo) {
     const editInput = document.createElement('input');
-    editInput.id = 'editInput'; //was getting a warning saying input needed an ID
+    editInput.id = 'editInput';
     editInput.type = 'text';
     editInput.value = toDo.toDoText;
 
-   // editInput.addEventListener('click', event => {
-     //   event.stopPropagation(); //// An event listener is added to the editInput to call event.stopPropagation(), which prevents clicks on the input from triggering the click event on the parent <li>. this allows you to focus on and edit the input with interference -- ChatGPT (when I got stuck and couldn't find an answer in the book I have or on stack overflow). I was having problems with the input box not staying active when I clicked on it.
-
-   // });
+    // Listen for click on the edit input
+    editInput.addEventListener('click', event => {
+        event.stopPropagation(); // Prevent triggering li click events
+    });
 
     li.appendChild(editInput);
-    // Call categorySelect to create the dropdown for categories
-    const categorySelectElement = categorySelect(li, toDo); // Store the select element for later use
-    addSaveButton(li, toDo, editInput, categorySelectElement);
-
-
+    
+    // Create the dropdown for category selection
+    categorySelect(li, toDo); 
+    addSaveButton(li, toDo, editInput);
 }
 
-// save button to save the changes made in the edit input
-function addSaveButton(li, toDo, editInput, categorySelect) {
+function addSaveButton(li, toDo, editInput) {
     const saveBtn = document.createElement('button');
     saveBtn.textContent = 'Save';
     saveBtn.addEventListener('click', () => {
         toDo.toDoText = editInput.value;
+        
         // Update the category from the select
         const select = li.querySelector('#categorySelect');
         toDo.toDoCategory = [parseInt(select.value)]; // Update the category ID
 
-        toDo.isEditing = false;
-        renderToDos();
+        toDo.isEditing = false; // Exit editing mode
+        renderToDos(); // Re-render to reflect changes
     });
     li.appendChild(saveBtn);
 }
+
 //edit button
 function addEditButton(li, toDo) {
     const editBtn = document.createElement('button');
@@ -194,10 +241,14 @@ function completedOnOff(li, toDo) {
 }
 //click event for completion line through
 function addCompleted(li, toDo) {
-    li.addEventListener('click', () => {
-        toDo.toDoComplete = !toDo.toDoComplete;
-        updateIncompleteCount();
-        renderToDos();
+    //need to refactor and only listen if it is an li
+    li.addEventListener('click', (event) => {
+        console.log('li event target', event.target.nodeName)
+        if(event.target.nodeName == 'LI') {
+            toDo.toDoComplete = !toDo.toDoComplete;
+            updateIncompleteCount();
+            renderToDos();
+            }
     });
 }
 
@@ -243,20 +294,5 @@ function updateIncompleteCount() {
     document.getElementById('incompleteCount').textContent = incompleteCount; // Update the incomplete count
 }
 
-//category stuff
-// Users can to be able to view todos within a category 
 
-// Categories in UI must mirror those that are in your data array
-// Users can view all todos regardless of category 
-// Users need to be able to select a category when adding a new todo. 
-// Users need to be able to manage categories
-// Add new categories 
-// Edit existing categories 
-// Delete existing categories 
-// Pay attention to what happens when a category is deleted with existing todos. This is part of a good UX.
-// When managing categories the following applies:
-// No prompt, or alert boxes
-// Use of the contenteditable HTML attribute is not allowed
-// Can't use a new category input value to edit
-// Edit input field must not be visible at all times, only when editing
 
